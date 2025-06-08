@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Courier New', monospace;
-      background: url('https://i.imgur.com/lEtpMYb.gif') center/cover no-repeat;
+      background: url('background.png') center/cover no-repeat; /* Image de fond locale */
       color: white;
       display: flex;
       justify-content: center;
@@ -56,7 +56,8 @@
 <body>
 
 <div class="card">
-  <img class="pfp" src="https://i.imgur.com/YOURPFP.png" alt="pfp">
+  <!-- Image locale pour la photo de profil -->
+  <img class="pfp" src="pfp.png" alt="pfp"> <!-- Image locale PNG -->
   <h2>OverClem</h2>
   <p class="tagline">Now, I'm becoming death</p>
   <p><code>root@OverClem:/abyss</code></p>
@@ -66,9 +67,9 @@
   <div id="final-message">Fin de transmition.</div>
 </div>
 
-<!-- Audio (optionnel) -->
+<!-- Audio local -->
 <audio autoplay loop>
-  <source src="your-audio.mp3" type="audio/mpeg">
+  <source src="audio.mp3" type="audio/mpeg"> <!-- Fichier audio local MP3 -->
 </audio>
 
 </body>
