@@ -15,9 +15,7 @@
       align-items: center;
       height: 100vh;
       overflow: hidden;
-      transition: background 0.3s ease;
     }
-
     .card {
       background: rgba(0, 0, 0, 0.75);
       padding: 30px;
@@ -26,32 +24,18 @@
       box-shadow: 0 0 20px #0f0;
       -webkit-backdrop-filter: blur(5px);
       backdrop-filter: blur(5px);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px #0f0;
-    }
-
     .pfp {
       border: 3px solid #0f0;
       border-radius: 50%;
       width: 100px;
       height: 100px;
-      transition: transform 0.3s ease;
     }
-
-    .pfp:hover {
-      transform: rotate(15deg);
-    }
-
     .tagline {
       margin-top: 10px;
       font-style: italic;
       color: #aaa;
     }
-
     .btn {
       margin-top: 20px;
       padding: 10px 20px;
@@ -60,58 +44,24 @@
       border: 1px solid #0f0;
       cursor: pointer;
       font-family: inherit;
-      transition: background-color 0.3s ease, color 0.3s ease;
     }
-
-    .btn:hover {
-      background-color: #0f0;
-      color: black;
-    }
-
     #final-message {
       display: none;
       margin-top: 20px;
       font-size: 24px;
       color: red;
-      opacity: 0;
-      transition: opacity 0.5s ease;
     }
-
-    #final-message.show {
-      opacity: 1;
-    }
-
-    /* Mobile responsiveness */
-    @media (max-width: 768px) {
-      body {
-        font-size: 14px;
-      }
-
-      .card {
-        padding: 20px;
-      }
-
-      .pfp {
-        width: 80px;
-        height: 80px;
-      }
-
-      .btn {
-        padding: 8px 16px;
-      }
-    }
-
   </style>
 </head>
 <body>
 
 <div class="card">
-  <img class="pfp" src="https://i.imgur.com/YOURPFP.png" alt="Image de profil d'OverClem">
+  <img class="pfp" src="https://i.imgur.com/YOURPFP.png" alt="pfp">
   <h2>OverClem</h2>
   <p class="tagline">Now, I'm becoming death</p>
   <p><code>root@OverClem:/abyss</code></p>
 
-  <button class="btn" onclick="document.getElementById('final-message').classList.add('show')">Access the truth</button>
+  <button class="btn" onclick="document.getElementById('final-message').style.display='block'">Access the truth</button>
 
   <div id="final-message">Fin de transmition.</div>
 </div>
