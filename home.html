@@ -56,20 +56,32 @@
 <body>
 
 <div class="card">
-  <img class="pfp" src="pfp.png" alt="pfp">
+  <img class="pfp" src="pfp.png" alt="Image de profil">
   <h2>OverClem</h2>
   <p class="tagline">Now, I'm becoming death</p>
   <p><code>root@OverClem:/abyss</code></p>
 
-  <button class="btn" onclick="document.getElementById('final-message').style.display='block'">Accéder à la vérité</button>
+  <button class="btn" onclick="reveal()">Accéder à la vérité</button>
 
   <div id="final-message">Fin de transmission.</div>
 </div>
 
-<!-- Audio local -->
-<audio autoplay loop>
-  <source src="audio.mp3" type="audio/mpeg">
-</audio>
+<!-- Audio local contrôlé par JS -->
+<audio id="audio" src="audio.mp3" preload="auto"></audio>
+
+<script>
+  function reveal() {
+    // Affiche le message final
+    document.getElementById('final-message').style.display = 'block';
+
+    // Lance le son après interaction utilisateur
+    const audio = document.getElementById('audio');
+    audio.volume = 0.5; // Réglez le volume si besoin
+    audio.play().catch(err => {
+      console.warn("Lecture audio bloquée :", err);
+    });
+  }
+</script>
 
 </body>
 </html>
