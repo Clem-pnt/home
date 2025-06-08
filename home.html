@@ -1,22 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>OverClem</title>
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Courier New', monospace;
-      background: url('background.png') center/cover no-repeat; /* Image de fond locale */
+      background: url('background.png') center/cover no-repeat;
       color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
       overflow: hidden;
     }
+
+    #overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      transition: all 1s ease;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    #overlay h1 {
+      font-size: 2rem;
+      color: #0f0;
+      padding: 20px;
+      border: 2px solid #0f0;
+      border-radius: 10px;
+    }
+
     .card {
+      position: relative;
       background: rgba(0, 0, 0, 0.75);
       padding: 30px;
       border-radius: 10px;
@@ -24,18 +53,23 @@
       box-shadow: 0 0 20px #0f0;
       -webkit-backdrop-filter: blur(5px);
       backdrop-filter: blur(5px);
+      display: none;
+      z-index: 1;
     }
+
     .pfp {
       border: 3px solid #0f0;
       border-radius: 50%;
       width: 100px;
       height: 100px;
     }
+
     .tagline {
       margin-top: 10px;
       font-style: italic;
       color: #aaa;
     }
+
     .btn {
       margin-top: 20px;
       padding: 10px 20px;
@@ -45,33 +79,64 @@
       cursor: pointer;
       font-family: inherit;
     }
+
     #final-message {
       display: none;
       margin-top: 20px;
       font-size: 24px;
       color: red;
     }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
   </style>
 </head>
 <body>
 
-<div class="card">
-  <!-- Image locale pour la photo de profil -->
-  <img class="pfp" src="pfp.png" alt="pfp"> <!-- Image locale PNG -->
-  <h2>OverClem</h2>
-  <p class="tagline">Now, I'm becoming death</p>
-  <p><code>root@OverClem:/abyss</code></p>
-
-  <button class="btn" onclick="document.getElementById('final-message').style.display='block'">Access the truth</button>
-
-  <div id="final-message">Fin de transmition.</div>
+<div id="overlay" onclick="enterSite()">
+  <h1>Cliquer pour entrer dans l’abîme</h1>
 </div>
 
-<!-- Audio local avec autoplay activé -->
-<audio autoplay loop>
-  <source src="audio.mp3" type="audio/mpeg"> <!-- Fichier audio local MP3 -->
-  Votre navigateur ne prend pas en charge l'élément audio.
+<div class="container">
+  <div class="card" id="mainCard">
+    <img class="pfp" src="pfp.png" alt="pfp">
+    <h2>OverClem</h2>
+    <p class="tagline">Now, I'm becoming death</p>
+    <p><code>root@OverClem:/abyss</code></p>
+
+    <button class="btn" onclick="document.getElementById('final-message').style.display='block'">Access the truth</button>
+    <div id="final-message">Fin de transmition.</div>
+  </div>
+</div>
+
+<audio id="bgAudio" loop>
+  <source src="audio.mp3" type="audio/mpeg" />
 </audio>
+
+<script>
+  function enterSite() {
+    // Supprimer le blur
+    const overlay = document.getElementById("overlay");
+    overlay.style.backdropFilter = "blur(0px)";
+    overlay.style.webkitBackdropFilter = "blur(0px)";
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
+    overlay.style.opacity = "0";
+    overlay.style.pointerEvents = "none";
+
+    // Afficher le contenu principal
+    document.getElementById("mainCard").style.display = "block";
+
+    // Lancer l'audio
+    const audio = document.getElementById("bgAudio");
+    audio.play().catch(err => {
+      console.log("Autoplay bloqué :", err);
+    });
+  }
+</script>
 
 </body>
 </html>
