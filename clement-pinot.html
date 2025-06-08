@@ -1,201 +1,74 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Site personnel de Clément Pinot présentant ses projets.">
-    <meta name="keywords" content="HTML, CSS, JavaScript, développement web, projets personnels">
-    <link rel="icon" type="image/x-icon" href="gothic-_5_.ico">
-    <title>Profil - Clément Pinot</title>
-
-    <!-- Intégration de Font Awesome pour les icônes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <style>
-        /* Styles de base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Permet au body de prendre toute la hauteur et configure flexbox */
-        html, body {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* Wrapper pour le contenu principal */
-        .wrapper {
-            flex: 1; /* Le contenu principal prend l'espace restant */
-            padding: 80px 20px 20px; /* Ajuste le padding-top pour laisser de l'espace pour le header fixe */
-        }
-
-        /* Header */
-        header {
-            position: fixed; /* Fixe le header en haut de la page */
-            top: 0; /* Positionne le header en haut de la fenêtre */
-            left: 0;
-            width: 100%; /* Fait en sorte que le header prenne toute la largeur de la page */
-            background-color: #2c3e50; /* Couleur bleu foncé */
-            color: #ecf0f1; /* Couleur claire pour le texte */
-            padding: 1rem 0;
-            text-align: center;
-            z-index: 1000; /* Assure que le header reste au-dessus des autres éléments */
-        }
-
-        header h1 {
-            margin-bottom: 0.5rem;
-            font-size: 2.5rem;
-        }
-
-        /* Navigation */
-        nav a {
-            margin: 0 15px;
-            color: #ecf0f1;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #3498db;
-        }
-
-        /* Section */
-        section {
-            padding: 40px 20px;
-        }
-
-        /* Projet Cards */
-        .project-container {
-            display: flex;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .project {
-            width: 300px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .project:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .project .btn {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            color: white;
-            background-color: #3498db;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        .project .btn:hover {
-            background-color: #2980b9;
-            transform: scale(1.05);
-        }
-
-        /* Footer */
-        footer {
-            background-color: #34495e;
-            color: #ecf0f1;
-            text-align: center;
-            padding: 20px 0;
-            width: 100%;
-        }
-
-        footer a {
-            color: #ecf0f1;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-
-        footer a:hover {
-            color: #3498db;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OverClem</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background: url('background.gif') center/cover no-repeat;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .card {
+      background: rgba(0, 0, 0, 0.75);
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 20px #0f0;
+      backdrop-filter: blur(5px);
+    }
+    .pfp {
+      border: 3px solid #0f0;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+    }
+    .tagline {
+      margin-top: 10px;
+      font-style: italic;
+      color: #aaa;
+    }
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: transparent;
+      color: #0f0;
+      border: 1px solid #0f0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    #final-message {
+      display: none;
+      margin-top: 20px;
+      font-size: 24px;
+      color: red;
+    }
+  </style>
 </head>
 <body>
-    <div class="wrapper">
-        <!-- En-tête -->
-        <header>
-            <h1>Bienvenue sur mon site !</h1>
-            <nav>
-                <a href="#about">À propos</a>
-                <a href="#projects">Projets</a>
-            </nav>
-        </header>
 
-        <!-- Section À propos -->
-        <section id="about">
-            <br> <br> <br> <br> <br>
-            <h2>À propos de moi</h2>
-            <p>Je m'appelle Clément Pinot, j'ai 17 ans et je suis passionné par l'informatique. Je suis le fondateur du serveur Minecraft Aragonite, modérateur de nombreux serveurs Discord, programmeur amateur, Youtubeur short et bien plus encore.</p>
-            <p>Mon objectif est de créer des expériences passionnantes, instructives et engageantes.</p>
-        </section>
+<div class="card">
+  <img class="pfp" src="pfp.png" alt="pfp">
+  <h2>OverClem</h2>
+  <p class="tagline">Now, I'm becoming death</p>
+  <p><code>root@OverClem:/abyss</code></p>
 
-        <!-- Section Projets -->
-        <section id="projects">
-            <h2>Mes Projets</h2>
-            <div class="project-container">
-                <div class="project">
-                    <h3>Aragonite</h3>
-                    <p>Aragonite est un serveur Minecraft PVP faction ouvert à tous. Nous nous efforçons de repousser les limites du possible toujours plus loin sans toutefois dénaturer le jeu.</p>
-                    <a href="https://discord.gg/GrDNCzqugb" target="_blank" class="btn">Le discord officiel</a> 
-                </div>
-                
-                <div class="project">
-                    <h3>Poèmes</h3>
-                    <p>J'écris des poèmes depuis 2020 mais je m'y suis remis sérieusement fin 2024, voici le site où je les poste.</p>
-                    <a href="https://clem-pnt.github.io/Clem-poemes/clem-poemes.html" target="_blank" class="btn">Voir les Poèmes</a>
-                </div>
-                <div class="project">
-                    <h3>Modération</h3>
-                    <p>Je suis modérateur sur différents serveurs Discord :</p>
-                    <a href="https://discord.gg/S4RcMgTbaW" target="_blank" class="btn">SosoCorp</a> 
-                    <a href="https://discord.gg/Khk8dQke94" target="_blank" class="btn">Chronical Time</a> 
-                    <a href="https://discord.gg/Xja9n4qUHK" target="_blank" class="btn">Azertim's place</a> 
-                </div>
-                <div class="project">
-                    <h3>Youtube</h3>
-                    <p>J'ai une chaîne Youtube spécialisé dans le jeu vidéo Brawl Stars, que des shorts pour le moment.</p>
-                    <a href="https://www.youtube.com/@Cl3m_bs" target="_blank" class="btn">Clem BS</a>
-                </div>
-            </div>
-        </section>
+  <button class="btn" onclick="document.getElementById('final-message').style.display='block'">Accéder à la vérité</button>
 
- <section id="remerciements">
-            
-            <h2>Remerciements</h2>
-            <p>Je souhaite particulierement remercier mes plus proches amis tel que Sophian, Romane ou encore Elina mais aussi ma famille, surtout mon frère, qui m'on toujours suporté et donné la force d'accomplir tout cela.</p>
-            
-        </section>
-    </div>
+  <div id="final-message">Fin de transmission.</div>
+</div>
 
-    <!-- Pied de page -->
-    <footer>
-        <div>
-            <a href="mailto:clement.pinot@gmail.com"><i class="fas fa-envelope"></i></a>
-            <a href="https://instagram.com/clem.pinot" target="_blank"><i class="fab fa-instagram"></i></a>
-        </div>
-    </footer>
+<!-- Audio local -->
+<audio autoplay loop>
+  <source src="audio.mp3" type="audio/mpeg">
+</audio>
+
 </body>
 </html>
