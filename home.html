@@ -18,6 +18,11 @@
       transition: background 0.3s ease;
     }
 
+    body.light-mode {
+      background: #fff;
+      color: #333;
+    }
+
     .card {
       background: rgba(0, 0, 0, 0.75);
       padding: 30px;
@@ -27,6 +32,12 @@
       -webkit-backdrop-filter: blur(5px);
       backdrop-filter: blur(5px);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card.light-mode {
+      background: rgba(255, 255, 255, 0.75);
+      color: #333;
+      box-shadow: 0 0 20px #0c0;
     }
 
     .card:hover {
@@ -81,6 +92,69 @@
       opacity: 1;
     }
 
+    /* Animation de type machine à écrire */
+    #typing-effect {
+      font-size: 24px;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(40) 1s forwards;
+    }
+
+    @keyframes typing {
+      0% {
+        width: 0;
+      }
+      100% {
+        width: 100%;
+      }
+    }
+
+    /* Micro-interactions sur les boutons et liens */
+    .micro-interaction {
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .micro-interaction:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+
+    /* Formulaire de contact */
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+      margin: 30px auto;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #0f0;
+    }
+
+    input, textarea {
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background-color: #333;
+      color: white;
+    }
+
+    button {
+      background-color: #0f0;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #0c0;
+    }
+
     /* Mobile responsiveness */
     @media (max-width: 768px) {
       body {
@@ -105,21 +179,74 @@
 </head>
 <body>
 
+<!-- Mode Switcher Button -->
+<button id="theme-toggle" class="micro-interaction" onclick="toggleTheme()">Switch Theme</button>
+
 <div class="card">
   <img class="pfp" src="https://i.imgur.com/YOURPFP.png" alt="Image de profil d'OverClem">
   <h2>OverClem</h2>
   <p class="tagline">Now, I'm becoming death</p>
   <p><code>root@OverClem:/abyss</code></p>
 
-  <button class="btn" onclick="document.getElementById('final-message').classList.add('show')">Access the truth</button>
+  <!-- Animation type machine à écrire -->
+  <p id="typing-effect"></p>
+
+  <button class="btn micro-interaction" onclick="document.getElementById('final-message').classList.add('show')">Access the truth</button>
 
   <div id="final-message">Fin de transmition.</div>
 </div>
+
+<!-- Formulaire de contact -->
+<form id="contact-form" action="submit_form.php" method="POST">
+  <label for="name">Your Name</label>
+  <input type="text" id="name" name="name" required><br>
+  
+  <label for="email">Your Email</label>
+  <input type="email" id="email" name="email" required><br>
+  
+  <label for="message">Your Message</label><br>
+  <textarea id="message" name="message" required></textarea><br>
+  
+  <button type="submit" class="micro-interaction">Send Message</button>
+</form>
 
 <!-- Audio (optionnel) -->
 <audio autoplay loop>
   <source src="your-audio.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+  // Theme Switcher
+  function toggleTheme() {
+    const body = document.body;
+    body.classList.toggle('light-mode');
+    const currentTheme = body.classList.contains('light-mode') ? 'light' : 'dark';
+    localStorage.setItem('theme', currentTheme);
+  }
+
+  // Apply the saved theme when the page loads
+  window.onload = function() {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'light') {
+      document.body.classList.add('light-mode');
+      document.querySelector('.card').classList.add('light-mode');
+    }
+  };
+
+  // Typewriter effect
+  const text = "OverClem - Now, I'm becoming death";
+  let i = 0;
+
+  function typeWriter() {
+    if (i < text.length) {
+      document.getElementById("typing-effect").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 100);
+    }
+  }
+
+  window.onload = typeWriter;
+</script>
 
 </body>
 </html>
