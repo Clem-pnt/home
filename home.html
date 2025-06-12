@@ -93,6 +93,20 @@
       align-items: center;
       height: 100vh;
     }
+
+    .content-wrapper {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      display: none; /* caché au départ */
+    }
+
+    .side-image {
+      width: 300px;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #0f0;
+    }
   </style>
 </head>
 <body>
@@ -102,14 +116,16 @@
 </div>
 
 <div class="container">
-  <div class="card" id="mainCard">
-    <img class="pfp" src="pfp.png" alt="pfp">
-    <h2>OverClem</h2>
-    <p class="tagline">Now, I'm becoming death</p>
-    <p><code>root@OverClem:/abyss</code></p>
-
-    <button class="btn" onclick="document.getElementById('final-message').style.display='block'">Access the truth</button>
-    <div id="final-message">Fin de transmition.</div>
+  <div class="content-wrapper" id="contentWrapper">
+    <div class="card" id="mainCard">
+      <img class="pfp" src="pfp.png" alt="pfp">
+      <h2>OverClem</h2>
+      <p class="tagline">Now, I'm becoming death</p>
+      <p><code>root@OverClem:/abyss</code></p>
+      <button class="btn" onclick="document.getElementById('final-message').style.display='block'">Access the truth</button>
+      <div id="final-message">Fin de transmition.</div>
+    </div>
+    <img src="imagen_2025-06-12_183311900.png" alt="side visual" class="side-image">
   </div>
 </div>
 
@@ -119,7 +135,6 @@
 
 <script>
   function enterSite() {
-    // Supprimer le blur
     const overlay = document.getElementById("overlay");
     overlay.style.backdropFilter = "blur(0px)";
     overlay.style.webkitBackdropFilter = "blur(0px)";
@@ -129,6 +144,7 @@
 
     // Afficher le contenu principal
     document.getElementById("mainCard").style.display = "block";
+    document.getElementById("contentWrapper").style.display = "flex";
 
     // Lancer l'audio
     const audio = document.getElementById("bgAudio");
