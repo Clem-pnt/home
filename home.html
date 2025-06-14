@@ -97,15 +97,40 @@
     .content-wrapper {
       display: flex;
       gap: 40px;
-      align-items: center;
-      display: none; /* caché au départ */
+      align-items: flex-start;
+      display: none;
     }
 
-    .side-image {
-      width: 700px;
-      height: auto;
-      border-radius: 15px;
+    /* Zone des paroles défilantes */
+    .lyrics-box {
+      width: 400px;
+      height: 300px;
+      overflow: hidden;
+      border: 2px solid #0f0;
+      padding: 20px;
+      border-radius: 10px;
       box-shadow: 0 0 15px #0f0;
+      background: rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    .lyrics-content {
+      position: absolute;
+      top: 100%;
+      animation: scrollLyrics 60s linear infinite;
+      white-space: pre-line;
+      color: #0f0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    @keyframes scrollLyrics {
+      from {
+        top: 100%;
+      }
+      to {
+        top: -100%;
+      }
     }
   </style>
 </head>
@@ -125,7 +150,45 @@
       <button class="btn" onclick="document.getElementById('final-message').style.display='block'">Access the truth</button>
       <div id="final-message">Fin de transmition.</div>
     </div>
-    <img src="imagen_2025-06-12_183311900.png" alt="side visual" class="side-image">
+
+    <!-- Bloc des paroles -->
+    <div class="lyrics-box">
+      <div class="lyrics-content" id="lyricsContent">
+J'pense à toi, j'pense à nous deux
+Mes sentiments en silencieux, mon cœur blessé fait ses adieux
+On passe du coup de foudre au coup de feu
+7 mois pour tomber amoureux, 2 jours pour s'laisser tous les deux
+Au final on est tous pareil
+On s'fait juste tourner la pareille
+T'es l'cauchemar de mon sommeil
+T'es l'nuage de mon soleil
+J'suis très loin mais j'te surveille
+Dans l'mal j'réfléchis j'bois une bouteille
+Et je sais que tu me baratines
+On s'adore mais on se chagrine
+Tes ennemis je les élimines
+Mon sang noir finit sur la mine
+Tu m'appelles mais moi je décline
+Dans ma tête c'est une citadine
+Mais jour par jour on s'éloigne
+Et ça, crois-moi, ça fait mal
+En fait t'es comme une fleur ouais tu m'as fané
+T'étais la plus belle à mes yeux mais tu m'as mis sur le côté
+N'oublie pas que si je t'ai quittée c'est parce que t'as tout fauté, ouais t'as tout gâché
+Doigt sur la gâchette, une balle dans la tête
+Et tu hantes mes rêves en créant des cauchemars
+J'attends que tu répondes à mes messages jusqu'à très tard
+J'attends que tu répondes à mes messages jusqu'à très tard, ouais ouais ouais
+L'argent ça ne fais pas le bonheur mais j'suis pas heureux
+Et si j'ai tout donné pour toi c'était par erreur
+Tu m'fais péter des plombs alors j'vais prendre l'air et j'bois pendant des heures eh
+J'traverse le désert sans eau et sans ton cœur
+Je sens ton corps et je sens bien que c'est terminé
+Tu m'as abandonné et moi j'ai tant donné
+En fait j'ai tout donné pour au final tout perdre
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -142,11 +205,9 @@
     overlay.style.opacity = "0";
     overlay.style.pointerEvents = "none";
 
-    // Afficher le contenu principal
     document.getElementById("mainCard").style.display = "block";
     document.getElementById("contentWrapper").style.display = "flex";
 
-    // Lancer l'audio
     const audio = document.getElementById("bgAudio");
     audio.play().catch(err => {
       console.log("Autoplay bloqué :", err);
