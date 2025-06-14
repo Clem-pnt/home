@@ -214,18 +214,21 @@ function enterSite() {
 
   audio.play().catch(err => console.log("Autoplay bloqué :", err));
 
-  audio.ontimeupdate = () => {
-    const currentTime = audio.currentTime;
-    lyrics.forEach((line, i) => {
-      const element = document.getElementById(`line-${i}`);
-      if (currentTime >= line.time) {
-        element.classList.add("active");
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-        element.classList.remove("active");
-      }
-    });
-  };
+  // Retarder l'affichage des paroles de 8 secondes
+  setTimeout(() => {
+    audio.ontimeupdate = () => {
+      const currentTime = audio.currentTime;
+      lyrics.forEach((line, i) => {
+        const element = document.getElementById(`line-${i}`);
+        if (currentTime >= line.time + 8) { // Ajoutez un délai de 8 secondes ici
+          element.classList.add("active");
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          element.classList.remove("active");
+        }
+      });
+    };
+  }, 8000); // Attendre 8 secondes avant de commencer le karaoké
 }
 </script>
 
