@@ -17,6 +17,9 @@
       color: white;
       height: 100vh;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     #overlay {
@@ -90,7 +93,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      height: calc(100vh - 60px);
     }
 
     .content-wrapper {
@@ -120,6 +123,16 @@
       opacity: 1;
       color: #0f0;
     }
+
+    footer {
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      text-align: center;
+    }
+
+    audio {
+      width: 80%;
+    }
   </style>
 </head>
 <body>
@@ -142,9 +155,12 @@
   </div>
 </div>
 
-<audio id="bgAudio" loop>
-  <source src="audio.mp3" type="audio/mpeg" />
-</audio>
+<footer>
+  <audio id="bgAudio" controls>
+    <source src="audio.mp3" type="audio/mpeg" />
+    Ton navigateur ne supporte pas la lecture audio.
+  </audio>
+</footer>
 
 <script>
 const lyrics = [
