@@ -53,7 +53,6 @@
       box-shadow: 0 0 20px #0f0;
       -webkit-backdrop-filter: blur(5px);
       backdrop-filter: blur(5px);
-      display: none;
       z-index: 1;
     }
 
@@ -97,40 +96,29 @@
     .content-wrapper {
       display: flex;
       gap: 40px;
-      align-items: flex-start;
+      align-items: center;
       display: none;
     }
 
-    /* Zone des paroles défilantes */
-    .lyrics-box {
-      width: 400px;
-      height: 300px;
-      overflow: hidden;
-      border: 2px solid #0f0;
-      padding: 20px;
+    #lyricsBox {
+      width: 600px;
+      max-height: 400px;
+      overflow-y: auto;
+      background: rgba(0, 0, 0, 0.5);
       border-radius: 10px;
+      padding: 20px;
       box-shadow: 0 0 15px #0f0;
-      background: rgba(0, 0, 0, 0.6);
-      position: relative;
     }
 
-    .lyrics-content {
-      position: absolute;
-      top: 100%;
-      animation: scrollLyrics 60s linear infinite;
-      white-space: pre-line;
+    .lyric-line {
+      opacity: 0.2;
+      transition: opacity 0.3s ease;
+      padding: 5px 0;
+    }
+
+    .lyric-line.active {
+      opacity: 1;
       color: #0f0;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    @keyframes scrollLyrics {
-      from {
-        top: 100%;
-      }
-      to {
-        top: -100%;
-      }
     }
   </style>
 </head>
@@ -150,45 +138,7 @@
       <button class="btn" onclick="document.getElementById('final-message').style.display='block'">Access the truth</button>
       <div id="final-message">Fin de transmition.</div>
     </div>
-
-    <!-- Bloc des paroles -->
-    <div class="lyrics-box">
-      <div class="lyrics-content" id="lyricsContent">
-J'pense à toi, j'pense à nous deux
-Mes sentiments en silencieux, mon cœur blessé fait ses adieux
-On passe du coup de foudre au coup de feu
-7 mois pour tomber amoureux, 2 jours pour s'laisser tous les deux
-Au final on est tous pareil
-On s'fait juste tourner la pareille
-T'es l'cauchemar de mon sommeil
-T'es l'nuage de mon soleil
-J'suis très loin mais j'te surveille
-Dans l'mal j'réfléchis j'bois une bouteille
-Et je sais que tu me baratines
-On s'adore mais on se chagrine
-Tes ennemis je les élimines
-Mon sang noir finit sur la mine
-Tu m'appelles mais moi je décline
-Dans ma tête c'est une citadine
-Mais jour par jour on s'éloigne
-Et ça, crois-moi, ça fait mal
-En fait t'es comme une fleur ouais tu m'as fané
-T'étais la plus belle à mes yeux mais tu m'as mis sur le côté
-N'oublie pas que si je t'ai quittée c'est parce que t'as tout fauté, ouais t'as tout gâché
-Doigt sur la gâchette, une balle dans la tête
-Et tu hantes mes rêves en créant des cauchemars
-J'attends que tu répondes à mes messages jusqu'à très tard
-J'attends que tu répondes à mes messages jusqu'à très tard, ouais ouais ouais
-L'argent ça ne fais pas le bonheur mais j'suis pas heureux
-Et si j'ai tout donné pour toi c'était par erreur
-Tu m'fais péter des plombs alors j'vais prendre l'air et j'bois pendant des heures eh
-J'traverse le désert sans eau et sans ton cœur
-Je sens ton corps et je sens bien que c'est terminé
-Tu m'as abandonné et moi j'ai tant donné
-En fait j'ai tout donné pour au final tout perdre
-      </div>
-    </div>
-
+    <div id="lyricsBox"></div>
   </div>
 </div>
 
@@ -197,22 +147,70 @@ En fait j'ai tout donné pour au final tout perdre
 </audio>
 
 <script>
-  function enterSite() {
-    const overlay = document.getElementById("overlay");
-    overlay.style.backdropFilter = "blur(0px)";
-    overlay.style.webkitBackdropFilter = "blur(0px)";
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
-    overlay.style.opacity = "0";
-    overlay.style.pointerEvents = "none";
+const lyrics = [
+  { time: 0, text: "J'pense à toi, j'pense à nous deux" },
+  { time: 5, text: "Mes sentiments en silencieux, mon cœur blessé fait ses adieux" },
+  { time: 10, text: "On passe du coup de foudre au coup de feu" },
+  { time: 14, text: "7 mois pour tomber amoureux, 2 jours pour s'laisser tous les deux" },
+  { time: 18, text: "Au final on est tous pareil" },
+  { time: 21, text: "On s'fait juste tourner la pareille" },
+  { time: 24, text: "T'es l'cauchemar de mon sommeil" },
+  { time: 27, text: "T'es l'nuage de mon soleil" },
+  { time: 30, text: "J'suis très loin mais j'te surveille" },
+  { time: 33, text: "Dans l'mal j'réfléchis j'bois une bouteille" },
+  { time: 36, text: "Et je sais que tu me baratines" },
+  { time: 39, text: "On s'adore mais on se chagrine" },
+  { time: 42, text: "Tes ennemis je les élimines" },
+  { time: 45, text: "Mon sang noir finit sur la mine" },
+  { time: 48, text: "Tu m'appelles mais moi je décline" },
+  { time: 51, text: "Dans ma tête c'est une citadine" },
+  { time: 54, text: "Mais jour par jour on s'éloigne" },
+  { time: 57, text: "Et ça, crois-moi, ça fait mal" },
+  { time: 60, text: "En fait t'es comme une fleur ouais tu m'as fané" },
+  { time: 64, text: "T'étais la plus belle à mes yeux mais tu m'as mis sur le côté" },
+  { time: 69, text: "N'oublie pas que si je t'ai quittée c'est parce que t'as tout fauté" },
+  { time: 74, text: "Ouais t'as tout gâché" },
+  { time: 77, text: "Doigt sur la gâchette, une balle dans la tête" },
+  { time: 81, text: "Et tu hantes mes rêves en créant des cauchemars" },
+  { time: 85, text: "J'attends que tu répondes à mes messages jusqu'à très tard" },
+  { time: 89, text: "J'attends que tu répondes à mes messages jusqu'à très tard, ouais ouais ouais" },
+  { time: 94, text: "L'argent ça ne fais pas le bonheur mais j'suis pas heureux" },
+  { time: 97, text: "Et si j'ai tout donné pour toi c'était par erreur" },
+  { time: 100, text: "Tu m'fais péter des plombs alors j'vais prendre l'air et j'bois pendant des heures eh" },
+  { time: 103, text: "J'traverse le désert sans eau et sans ton cœur" }
+];
 
-    document.getElementById("mainCard").style.display = "block";
-    document.getElementById("contentWrapper").style.display = "flex";
+function enterSite() {
+  const overlay = document.getElementById("overlay");
+  overlay.style.backdropFilter = "blur(0px)";
+  overlay.style.webkitBackdropFilter = "blur(0px)";
+  overlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
+  overlay.style.opacity = "0";
+  overlay.style.pointerEvents = "none";
 
-    const audio = document.getElementById("bgAudio");
-    audio.play().catch(err => {
-      console.log("Autoplay bloqué :", err);
+  document.getElementById("mainCard").style.display = "block";
+  document.getElementById("contentWrapper").style.display = "flex";
+
+  const audio = document.getElementById("bgAudio");
+  const lyricsBox = document.getElementById("lyricsBox");
+
+  lyricsBox.innerHTML = lyrics.map((line, i) => `<div class="lyric-line" id="line-${i}">${line.text}</div>`).join('');
+
+  audio.play().catch(err => console.log("Autoplay bloqué :", err));
+
+  audio.ontimeupdate = () => {
+    const currentTime = audio.currentTime;
+    lyrics.forEach((line, i) => {
+      const element = document.getElementById(`line-${i}`);
+      if (currentTime >= line.time) {
+        element.classList.add("active");
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        element.classList.remove("active");
+      }
     });
-  }
+  };
+}
 </script>
 
 </body>
