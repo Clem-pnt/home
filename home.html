@@ -126,11 +126,26 @@
     #lyricsBox {
       width: 600px;
       max-height: 400px;
-      overflow-y: auto;
+      overflow-y: scroll;
       background: rgba(0, 0, 0, 0.5);
       border-radius: 10px;
       padding: 20px;
       box-shadow: 0 0 15px #0f0;
+      scrollbar-width: thin;
+      scrollbar-color: #0f0 #000;
+    }
+
+    #lyricsBox::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #lyricsBox::-webkit-scrollbar-track {
+      background: #000;
+    }
+
+    #lyricsBox::-webkit-scrollbar-thumb {
+      background-color: #0f0;
+      border-radius: 10px;
     }
 
     .lyric-line {
@@ -236,7 +251,7 @@
         const currentTime = audio.currentTime;
         lyrics.forEach((line, i) => {
           const element = document.getElementById(`line-${i}`);
-          if (currentTime >= line.time + 8) {
+          if (currentTime >= line.time + 8) { // Délai de 8 secondes
             element.classList.add("active");
             element.scrollIntoView({ behavior: 'smooth', block: 'center' });
           } else {
