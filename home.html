@@ -147,33 +147,7 @@
     }
 
     footer {
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.7);
-      text-align: center;
-    }
-
-    audio {
-      width: 80%;
-    }
-
-    /* Style pour le mode clair */
-    body.light-mode {
-      background-color: #fff;
-      color: #000;
-    }
-
-    body.light-mode .card {
-      background: rgba(255, 255, 255, 0.8);
-    }
-
-    #themeToggle {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: transparent;
-      color: #0f0;
-      border: 1px solid #0f0;
-      cursor: pointer;
-      font-family: inherit;
+      display: none; /* Masque le footer qui contient la barre audio */
     }
 
   </style>
@@ -199,14 +173,9 @@
   </div>
 </div>
 
+<!-- Footer avec la barre audio supprimée -->
 <footer>
-  <audio id="bgAudio" controls>
-    <source src="audio.mp3" type="audio/mpeg" />
-    Ton navigateur ne supporte pas la lecture audio.
-  </audio>
-
-  <!-- Bouton pour changer de thème -->
-  <button id="themeToggle" onclick="toggleTheme()">Changer de thème</button>
+  <!-- La barre audio a été enlevée -->
 </footer>
 
 <script>
@@ -255,7 +224,7 @@
     document.getElementById("mainCard").style.display = "block";
     document.getElementById("contentWrapper").style.display = "flex";
 
-    const audio = document.getElementById("bgAudio");
+    const audio = new Audio('audio.mp3');  // Ajout de la musique sans afficher la barre
     const lyricsBox = document.getElementById("lyricsBox");
 
     lyricsBox.innerHTML = lyrics.map((line, i) => `<div class="lyric-line" id="line-${i}">${line.text}</div>`).join('');
@@ -276,11 +245,6 @@
         });
       };
     }, 8000);
-  }
-
-  // Fonction pour changer le thème
-  function toggleTheme() {
-    document.body.classList.toggle("light-mode");
   }
 </script>
 
