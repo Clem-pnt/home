@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Profile - OverClem</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: #1a1a1a;
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.75);
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 20px #0f0;
+    }
+
+    h2 {
+      color: #0f0;
+      font-size: 2.5rem;
+    }
+
+    .pfp {
+      border: 3px solid #0f0;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+    }
+
+    .tagline {
+      margin-top: 10px;
+      font-style: italic;
+      color: #aaa;
+    }
+
+    .back-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #0f0;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <img class="pfp" src="pfp.png" alt="pfp">
+    <h2>OverClem</h2>
+    <p class="tagline">Your personal abyss</p>
+    <p>Welcome to my profile page</p>
+    <button class="back-btn" onclick="window.location.href='home.html'">Back to Home</button>
+  </div>
+
+</body>
+</html>
