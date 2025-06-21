@@ -13,56 +13,75 @@
 
     body {
       font-family: 'Courier New', monospace;
-      background-color: #1e1e1e;
+      background-color: #121212;
       color: white;
       height: 100vh;
       overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
       padding: 20px;
-      background: #0f0;
+      background: linear-gradient(45deg, #0f0, #00ff99);
       color: black;
-      font-size: 2rem;
+      font-size: 2.5rem;
+      font-weight: bold;
       text-align: left;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
     .projects-container {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
+      justify-content: center;
       padding: 40px;
+      gap: 30px;
+      flex: 1;
+      overflow-y: auto;
     }
 
     .project-card {
       width: 300px;
-      margin: 20px;
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 0 15px #0f0;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 255, 0, 0.6);
       text-align: center;
-      transition: transform 0.3s ease-in-out;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(45deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6));
     }
 
     .project-card:hover {
       transform: translateY(-10px);
+      box-shadow: 0 6px 20px rgba(0, 255, 0, 0.8);
     }
 
     .project-card img {
       width: 100%;
       border-radius: 10px;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card img:hover {
+      transform: scale(1.05);
     }
 
     .project-card h3 {
-      margin: 10px 0;
+      margin: 15px 0;
       color: #0f0;
+      font-size: 1.5rem;
+      letter-spacing: 1px;
     }
 
     .project-card p {
       font-size: 1rem;
       color: #aaa;
+      line-height: 1.6;
     }
 
     .secret-project {
@@ -70,21 +89,45 @@
       justify-content: center;
       align-items: center;
       padding: 40px;
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 10px;
-      box-shadow: 0 0 15px #0f0;
-    }
-
-    .secret-project h3 {
-      font-size: 1.5rem;
-      color: #0f0;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 255, 0, 0.6);
       text-align: center;
     }
 
-    .banner {
+    .secret-project h3 {
+      font-size: 1.8rem;
+      color: #0f0;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .secret-project img {
       width: 100%;
       border-radius: 10px;
+      transition: transform 0.3s ease;
     }
+
+    .secret-project img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Animations */
+    @keyframes slideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .project-card, .secret-project {
+      animation: slideIn 1s ease-out;
+    }
+
   </style>
 </head>
 <body>
@@ -121,7 +164,7 @@
     <div class="secret-project">
       <div>
         <h3>Projet secret ?</h3>
-        <img src="secret-banner.png" alt="Projet secret" class="banner">
+        <img src="secret-banner.png" alt="Projet secret">
       </div>
     </div>
 
