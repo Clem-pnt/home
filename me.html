@@ -62,13 +62,22 @@
     }
 
     .project-card img {
-      width: 100%;
+      width: 80%;
       border-radius: 10px;
+      margin-bottom: 15px;
       transition: transform 0.4s ease;
     }
 
-    .project-card img:hover {
-      transform: scale(1.05);
+    .project-card img.logo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+    }
+
+    .project-card img.banner {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
     }
 
     .project-card h3 {
@@ -141,33 +150,38 @@
   <div class="projects-container">
     <!-- Projet Aragonite -->
     <div class="project-card">
-      <img src="aragonite-banner.png" alt="Aragonite">
+      <img src="aragonite-logo.png" alt="Aragonite" class="logo">
       <h3>Aragonite</h3>
-      <p>Mon serveur Minecraft PvP faction moddé. Affrontez d'autres joueurs dans un monde dynamique rempli de factions et de combats stratégiques.</p>
+      <p>Aragonite est un serveur Minecraft PvP de type faction moddé, où les joueurs s'affrontent dans des batailles stratégiques pour conquérir le monde. Rejoignez une faction, formez des alliances et préparez-vous à dominer dans un univers riche en fonctionnalités et en défis.</p>
+      <img src="aragonite-banner.png" alt="Bannière Aragonite" class="banner">
     </div>
 
     <!-- Projet Goliath -->
     <div class="project-card">
-      <img src="goliath-logo.png" alt="Goliath">
+      <img src="goliath-logo.png" alt="Goliath" class="logo">
       <h3>Goliath</h3>
-      <p>Mon bot Discord multifonction. Utilisez-le pour gérer votre serveur, créer des commandes personnalisées et bien plus encore.</p>
+      <p>Goliath est un bot Discord multifonction conçu pour faciliter la gestion de votre serveur. Que ce soit pour automatiser des tâches, gérer des rôles ou intégrer des jeux, ce bot est l'outil tout-en-un pour optimiser l'expérience utilisateur sur votre serveur.</p>
+      <img src="goliath-banner.png" alt="Bannière Goliath" class="banner">
     </div>
+  </div>
 
+  <div class="projects-container">
     <!-- Projet Arkania -->
     <div class="project-card">
-      <img src="arkania-logo.png" alt="Arkania">
+      <img src="arkania-logo.png" alt="Arkania" class="logo">
       <h3>Arkania</h3>
-      <p>Un serveur Discord de rencontre et RP magique. Rejoignez un monde magique où vous pouvez rencontrer de nouveaux amis et plonger dans des aventures fantastiques.</p>
+      <p>Arkania est un serveur Discord axé sur les rencontres et le RP dans un univers magique. Entrez dans un monde où chaque choix vous plonge dans des aventures fantastiques et où vous pouvez rencontrer des joueurs partageant les mêmes passions pour l'aventure et le fantastique.</p>
+      <img src="arkania-banner.png" alt="Bannière Arkania" class="banner">
     </div>
 
     <!-- Projet secret -->
     <div class="secret-project">
       <div>
         <h3>Projet secret ?</h3>
+        <p>Un projet mystérieux est en préparation... Plus d'infos bientôt !</p>
         <img src="secret-banner.png" alt="Projet secret">
       </div>
     </div>
-
   </div>
 
 </body>
